@@ -13,6 +13,9 @@
 		79913BF926B42486002DC760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79913BF726B42486002DC760 /* Main.storyboard */; };
 		79913BFB26B42488002DC760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79913BFA26B42488002DC760 /* Assets.xcassets */; };
 		79913BFE26B42488002DC760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79913BFC26B42488002DC760 /* LaunchScreen.storyboard */; };
+		79913C0626B42682002DC760 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913C0526B42682002DC760 /* GridView.swift */; };
+		79913C0826B42F8C002DC760 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913C0726B42F8C002DC760 /* InfoView.swift */; };
+		79913C0C26B516AB002DC760 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79913C0B26B516AB002DC760 /* Grid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		79913BFA26B42488002DC760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79913BFD26B42488002DC760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79913BFF26B42488002DC760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79913C0526B42682002DC760 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		79913C0726B42F8C002DC760 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		79913C0B26B516AB002DC760 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				79913BF326B42486002DC760 /* SceneDelegate.swift */,
 				79913BF526B42486002DC760 /* ViewController.swift */,
 				79913BF726B42486002DC760 /* Main.storyboard */,
+				79913C0B26B516AB002DC760 /* Grid.swift */,
+				79913C0726B42F8C002DC760 /* InfoView.swift */,
+				79913C0526B42682002DC760 /* GridView.swift */,
 				79913BFA26B42488002DC760 /* Assets.xcassets */,
 				79913BFC26B42488002DC760 /* LaunchScreen.storyboard */,
 				79913BFF26B42488002DC760 /* Info.plist */,
@@ -140,7 +149,10 @@
 			files = (
 				79913BF626B42486002DC760 /* ViewController.swift in Sources */,
 				79913BF226B42486002DC760 /* AppDelegate.swift in Sources */,
+				79913C0626B42682002DC760 /* GridView.swift in Sources */,
+				79913C0826B42F8C002DC760 /* InfoView.swift in Sources */,
 				79913BF426B42486002DC760 /* SceneDelegate.swift in Sources */,
+				79913C0C26B516AB002DC760 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
