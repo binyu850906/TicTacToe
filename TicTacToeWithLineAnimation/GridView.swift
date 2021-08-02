@@ -8,8 +8,6 @@
 import UIKit
 
 class GridView: UIView {
-
-   
    
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()

@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     
     @IBOutlet var gestureRecognizer: UIPanGestureRecognizer!
     
+    let grid: Grid = Grid()
+    
+    var occupyPieces = [UILabel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +57,34 @@ class ViewController: UIViewController {
         rotateAnimator.startAnimation()
     }
     
+    func newGame() {
+        grid.clear()
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 2, delay: 1, options: []) {
+            self.occupyPieces.forEach { piece in
+                piece.alpha = 0
+            }
+        } completion: { (_) in
+            self.occupyPieces.forEach { piece in
+                piece.removeFromSuperview()
+            }
+            
+            self.occupyPieces.removeAll()
+            self.taketurn(label: self.oLabel)
+            
+        }
+
+    }
 
     @IBAction func infoButtonTapped(_ sender: Any) {
-        infoView.show(text: "玩法：三個成直線的贏")
+        infoView.show(text: "玩法：將三個相同符號連成一直線的人獲勝")
     }
     
     @IBAction func closeInfoView(_ sender: Any) {
         infoView.close()
+        
+        if grid.winner != nil || grid.isTie {
+            newGame()
+        }
     }
     
     
@@ -81,22 +105,40 @@ class ViewController: UIViewController {
         return newLabel
     }
     
-    func finishCurrentTurn(label: UILabel, originalPieceCenter: CGPoint ) {
+    func finishCurrentTurn(label: UILabel,index: Int, originalPieceCenter: CGPoint ) {
+        
+        occupyPieces.append(label)
         let newLabel = creatPieceLabel(label: label)
         newLabel.center = originalPieceCenter
         view.addSubview(newLabel)
         
+        let nextLabel: UILabel
+        
         if label == xLabel {
+            self.grid.occupy(piece: .X, on: index)
             xLabel = newLabel
-            taketurn(label: oLabel)
+            nextLabel = oLabel
         } else {
+            self.grid.occupy(piece: .O, on: index)
             oLabel = newLabel
-            taketurn(label: xLabel)
+            nextLabel = xLabel
         }
-     
+        
+        if let winner = grid.winner {
+            if winner == Grid.Piece.O{
+                infoView.show(text: "O Win")
+            }else {
+                infoView.show(text: "X Win")
+            }
+        }else if grid.isTie {
+            infoView.show(text: "Tie")
+        } else {
+            taketurn(label: nextLabel)
+        }
+        
     }
     
-    func placePiece(_ label: UILabel, on square: UIView) {
+    func placePiece(_ label: UILabel, on square: UIView, index: Int) {
         
         var originalPieceCenter = CGPoint.zero
         
@@ -105,7 +147,7 @@ class ViewController: UIViewController {
             originalPieceCenter = label.center
             label.center = square.center
         } completion: { _ in
-            self.finishCurrentTurn(label: label, originalPieceCenter: originalPieceCenter)
+            self.finishCurrentTurn(label: label, index: index, originalPieceCenter: originalPieceCenter)
         }
     }
     
@@ -120,33 +162,24 @@ class ViewController: UIViewController {
             var targetSquare: UIView?
             var targetIndex: Int?
             
-            for square in squares {
-                let intersectionFrame = square.frame.intersection(label.frame)
-                
-                let area = intersectionFrame.width * intersectionFrame.height
-                
-                if area > maxIntersectionrea{
-                    maxIntersectionrea = area
-                    targetSquare = square
-                }
-                
-            }
             
             
             for (i, square) in squares.enumerated() {
                 let intersectionFrame = square.frame.intersection(label.frame)
                 let area = intersectionFrame.width * intersectionFrame.height
                 
-                if area > maxIntersectionrea{
-                    maxIntersectionrea = area
-                    targetSquare = square
-                    targetIndex = i
+                if area > maxIntersectionrea {
+                    if (grid.isSquareEmpty(index: i)) {
+                        maxIntersectionrea = area
+                        targetSquare = square
+                        targetIndex = i
+                    }
                 }
             }
             
-            if let targetSquare = targetSquare {
-                
-                placePiece(label, on: targetSquare)
+            if let targetSquare = targetSquare, let targetIndex = targetIndex {
+               
+                placePiece(label, on: targetSquare, index: targetIndex)
                 
             } else {
                 pieceBackToStartLocation(label: label)

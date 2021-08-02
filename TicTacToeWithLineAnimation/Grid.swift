@@ -48,6 +48,7 @@ class Grid {
         var winner: Piece?
         for line in lines {
             if let firstPiece = squares[line[0]]{
+                print(firstPiece)
                 let result = line.allSatisfy { index -> Bool in
                     return squares[index] == firstPiece
                 }

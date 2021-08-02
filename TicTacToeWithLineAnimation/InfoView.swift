@@ -10,12 +10,16 @@ import UIKit
 class InfoView: UIView {
 
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var okButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        okButton.tintColor = .white
+        textLabel.textColor  = .white
+        self.backgroundColor = .black
         layer.cornerRadius = 10
         layer.borderWidth = 5
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = UIColor.gray.cgColor
     }
 
     func show(text: String) {
