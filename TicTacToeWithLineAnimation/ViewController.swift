@@ -124,17 +124,54 @@ class ViewController: UIViewController {
             nextLabel = xLabel
         }
         
-        if let winner = grid.winner {
-            if winner == Grid.Piece.O{
-                infoView.show(text: "O Win")
-            }else {
-                infoView.show(text: "X Win")
+        
+        
+        if grid.winnerLines.isEmpty == false {
+            grid.winnerLines.forEach { indexs in
+                showWinLineAnimation(startPoint: squares[indexs.first!].center, endPoint: squares[indexs.last!].center)
             }
         }else if grid.isTie {
             infoView.show(text: "Tie")
         } else {
             taketurn(label: nextLabel)
         }
+        
+    }
+    
+    func showWinLineAnimation(startPoint: CGPoint, endPoint: CGPoint) {
+        let path = UIBezierPath()
+        path.move(to: startPoint)
+        path.addLine(to: endPoint)
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeLayer.lineWidth = 10
+        shapeLayer.lineCap = .round
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(3)
+        
+        let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        strokeAnimation.fromValue = 0
+        strokeAnimation.toValue = 1
+        
+        CATransaction.setCompletionBlock {
+            shapeLayer.removeFromSuperlayer()
+            
+            if let winner = self.grid.winner {
+                if winner == Grid.Piece.O {
+                    self.infoView.show(text: "O Win!")
+                }else {
+                    self.infoView.show(text: "X Win!")
+                }
+            }
+        }
+        
+        shapeLayer.add(strokeAnimation, forKey: nil)
+        view.layer.addSublayer(shapeLayer)
+        
+        CATransaction.commit()
         
     }
     

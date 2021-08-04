@@ -61,4 +61,21 @@ class Grid {
             
         return winner
     }
+    
+    
+    var winnerLines: [[Int]] {
+        var winnerLines = [[Int]]()
+        for line in lines {
+            if let firstPiece = squares[line[0]] {
+                let result = line.allSatisfy { index -> Bool in
+                    squares[index] == firstPiece
+                }
+                
+                if result {
+                    winnerLines.append(line)
+                }
+            }
+        }
+        return winnerLines
+    }
 }

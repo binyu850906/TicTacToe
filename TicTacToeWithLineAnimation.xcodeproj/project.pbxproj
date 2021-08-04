@@ -111,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 79913BE926B42486002DC760 /* Build configuration list for PBXProject "TicTacToeWithLineAnimation" */;
+			buildConfigurationList = 79913BE926B42486002DC760 /* Build configuration list for PBXProject "TicTacToe" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -353,7 +353,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		79913BE926B42486002DC760 /* Build configuration list for PBXProject "TicTacToeWithLineAnimation" */ = {
+		79913BE926B42486002DC760 /* Build configuration list for PBXProject "TicTacToe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79913C0026B42488002DC760 /* Debug */,
